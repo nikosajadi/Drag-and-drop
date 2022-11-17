@@ -10,6 +10,36 @@
 <body>
     <h1 class="main-title">Kanban Board</h1>
     <!-- Script -->
+    <!-- we are going to use unordeard lists to build our main columms and each colunmn is going to have its own unordered lists -->
+    <div class="drag-container">
+        <ul class="drag-list">
+            <!-- backlog colum -->
+            <li class="drag-column backlog-column">
+            <span class="header">
+                <h1>Backlog</h1>
+            </span>
+            <!-- Backlog content -->
+                <div id="backlog-content">
+                   <ul class="drag-item-list" id="backlog-list">
+                       <li class="drag-item">Test</li>
+                       <li class="drag-item">Test</li>
+                       <li class="drag-item">Test</li>
+                   </ul>
+                </div>
+                <!-- Add buttom Group for every column -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span>Add Item</span>
+                    </div>
+                    <div class="add-btn solid">
+                        <div class="add-item"></div>
+                    </div>
+                </div>
+        
+            </li>
+        </ul>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
