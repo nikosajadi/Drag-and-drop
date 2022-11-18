@@ -90,7 +90,8 @@ ul {
 /* Custom Scrollbar */
 .custom-scroll {
   overflow-y: auto;
-  max-height: 75vh;
+  /* it is 75 is space for our Add container, which we he havenot seen yet*/
+  max-height: 25vh;
 }
 
 .custom-scroll::-webkit-scrollbar-track {
