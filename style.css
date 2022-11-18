@@ -7,14 +7,14 @@ html {
 
 :root {
   --column-1: #0c6007;
-  --column-2: #1b6161;
-  --column-3: #2d8504;
-  --column-4: #0a8244;
+  --column-2: #1b2f61;
+  --column-3: #580485;
+  --column-4: #0a7682;
 }
 
 body {
   margin: 0;
-  background: url("./trees.jpg");
+  background: url("./ice.jpg");
   background-size: cover;
   background-position: 50% 60%;
   background-attachment: fixed;
