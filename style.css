@@ -54,7 +54,7 @@ ul {
   flex: 1;
   margin: 0 10px;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(86, 92, 142, 0.4);
   border-radius: 10px;
   overflow-x: hidden;
 }
@@ -97,7 +97,7 @@ ul {
 .custom-scroll::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(80, 11, 16, 0.3);
   margin-right: 5px;
 }
 
