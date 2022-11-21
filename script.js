@@ -10,7 +10,9 @@ const progressList = document.getElementById('progress-list');
 const completeList = document.getElementById('complete-list');
 const onHoldList = document.getElementById('on-hold-list');
 
-// Items
+// we want to show thtat we have not yet loaded from local storage
+// Items 
+let updatedOnLoad = false;
 
 // Initialize Arrays
 //this is going to store the data for each of our lists 
@@ -55,3 +57,11 @@ function updateSavedColumns() {
     //localStorage.setItem('progress', JSON.stringify(progressListArray));
     
   }
+
+  // Update Columns in DOM - Reset HTML, Filter Array, Update localStorage
+function updateDOM() {
+  // Check localStorage once
+  if (!updatedOnLoad) {
+    getSavedColumns();
+  }
+}
