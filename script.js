@@ -10,9 +10,9 @@ const progressList = document.getElementById('progress-list');
 const completeList = document.getElementById('complete-list');
 const onHoldList = document.getElementById('on-hold-list');
 
-// we want to show thtat we have not yet loaded from local storage
+// we want to show that we have not yet loaded from local storage
 // Items 
-let updatedOnLoad = false;
+let updatedOnLoad = false; 
 
 // Initialize Arrays
 //this is going to store the data for each of our lists 
@@ -58,10 +58,52 @@ function updateSavedColumns() {
     
   }
 
+//create DOM element FOR each list Items
+function createItemEl(columnEl, column, item, index) {
+  // console.log('columnEl:', columnEl);
+  // console.log('column:', column);
+  // console.log('item:', item);
+  // console.log('index:', index);
+  //List Item
+  //creates an element,a list element specificaly adding in the class of drag item so we creating a lis element.
+  const listEl = document.createElement('li');
+  //after run every item in our array, here we adding our css class of drag item
+  listEl.classList.add('drag-item');
+  // the next thing that we add to the text item
+  listEl.textContent = item
+}
+
   // Update Columns in DOM - Reset HTML, Filter Array, Update localStorage
 function updateDOM() {
   // Check localStorage once
   if (!updatedOnLoad) {
     getSavedColumns();
   }
+  //this will allow us reset and remove all of the element within our  list
+  //backlogList
+  backlogList.textContent = '';
+  //here is run for every item in our array
+  backlogListArray.forEach((backlogItem, index) => {
+    createItemEl(backlogList,0 ,backlogItem,index);
+  });
+
+  //backlogListArray = filterArray(backlogListArray);
+  // Progress Column
+  progressListEl.textContent = '';
+  progressListArray.forEach((progressItem, index) => {
+    createItemEl(progressListEl, 0, progressItem, index);
+  });
+  //progressListArray = filterArray(progressListArray);
+  // Complete Column
+  completeListEl.textContent = '';
+  completeListArray.forEach((completeItem, index) => {
+    createItemEl(completeListEl, 0, completeItem, index);
+  });
+  //completeListArray = filterArray(completeListArray);
+  // On Hold Column
+  onHoldListEl.textContent = '';
+  onHoldListArray.forEach((onHoldItem, index) => {
+    //createItemEl(onHoldListEl, 0, onHoldItem, index);
+  }); 
 }
+updateDOM();
