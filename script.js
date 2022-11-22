@@ -24,15 +24,17 @@ let onHoldListArray = [];
 let listArrays = [];
 
 //get Arrays from localStorage if available, set defult values if not
-function  getSavedColumns() {
+function getSavedColumns() {
     // here is checking to see if backlog items exists in localStorage
     if (localStorage.getItem('backlogItems')) {
         // The JSON.parse() method parses a JSON string, it takses a Jason string and constructs it back into a javaScript object.
         // the first part we should get bookmark from localStorage if available
-        backlogListArray= JSON.parse(localStorage.getItem('backlogListArray'));
-        progressListArray= JSON.parse(localStorage.getItem('progressListArray'));
-        completeListArray= JSON.parse(localStorage.getItem('completeListArray'));
-        onHoldListArray= JSON.parse(localStorage.getItem('onHoldListArray'));
+        backlogListArray = JSON.parse(localStorage.backlogItems);
+        progressListArray = JSON.parse(localStorage.progressItems);
+        completeListArray = JSON.parse(localStorage.completeItems);
+        onHoldListArray = JSON.parse(localStorage.onHoldItems); 
+ 
+
     } else {
         //create bookmarks array in localStorage
         backlogListArray = ['Release the course', 'Sit back and relax'];
@@ -60,10 +62,10 @@ function updateSavedColumns() {
 
 //create DOM element FOR each list Items
 function createItemEl(columnEl, column, item, index) {
-  // console.log('columnEl:', columnEl);
-  // console.log('column:', column);
-  // console.log('item:', item);
-  // console.log('index:', index);
+  console.log('columnEl:', columnEl);
+  console.log('column:', column);
+  console.log('item:', item);
+  console.log('index:', index);
   //List Item
   //creates an element,a list element specificaly adding in the class of drag item so we creating a lis element.
   const listEl = document.createElement('li');
@@ -71,6 +73,9 @@ function createItemEl(columnEl, column, item, index) {
   listEl.classList.add('drag-item');
   // the next thing that we add to the text item
   listEl.textContent = item
+  // we going to Append child and use list element
+  //next step Append 
+  columnEl.appendChild(listEl);
 }
 
   // Update Columns in DOM - Reset HTML, Filter Array, Update localStorage
@@ -81,29 +86,29 @@ function updateDOM() {
   }
   //this will allow us reset and remove all of the element within our  list
   //backlogList
-  backlogList.textContent = '';
+  backlogListEl.textContent = '';
   //here is run for every item in our array
   backlogListArray.forEach((backlogItem, index) => {
-    createItemEl(backlogList,0 ,backlogItem,index);
+    createItemEl(backlogListEl, 0, backlogItem, index);
   });
 
   //backlogListArray = filterArray(backlogListArray);
   // Progress Column
   progressListEl.textContent = '';
   progressListArray.forEach((progressItem, index) => {
-    createItemEl(progressListEl, 0, progressItem, index);
+    createItemEl(progressListEl, 1, progressItem, index);
   });
   //progressListArray = filterArray(progressListArray);
   // Complete Column
   completeListEl.textContent = '';
   completeListArray.forEach((completeItem, index) => {
-    createItemEl(completeListEl, 0, completeItem, index);
+    createItemEl(completeListEl, 2, completeItem, index);
   });
   //completeListArray = filterArray(completeListArray);
   // On Hold Column
   onHoldListEl.textContent = '';
   onHoldListArray.forEach((onHoldItem, index) => {
-    //createItemEl(onHoldListEl, 0, onHoldItem, index);
+    createItemEl(onHoldListEl, 3, onHoldItem, index);
   }); 
 }
 updateDOM();
