@@ -4,11 +4,11 @@ const addItemContainers = document.querySelectorAll('.add-container');
 // whenever we add something to a column
 const addItems = document.querySelectorAll('.add-item');
 // Item Lists
-const itemLists = document.querySelectorAll('.drag-item-list');
-const backlogList = document.getElementById('backlog-list');
-const progressList = document.getElementById('progress-list');
-const completeList = document.getElementById('complete-list');
-const onHoldList = document.getElementById('on-hold-list');
+const listColumns = document.querySelectorAll('.drag-item-list');
+const backlogListEl = document.getElementById('backlog-list');
+const progressListEl = document.getElementById('progress-list');
+const completeListEl = document.getElementById('complete-list');
+const onHoldListEl = document.getElementById('on-hold-list');
 
 // we want to show that we have not yet loaded from local storage
 // Items 
@@ -22,6 +22,9 @@ let completeListArray = [];
 let onHoldListArray = [];
 //is just going to be an array of all these other arrays
 let listArrays = [];
+//Drag Functionality 
+//it is not going to be set any things because it is going to be replaced in that function
+let draggedItem;
 
 //get Arrays from localStorage if available, set defult values if not
 function getSavedColumns() {
@@ -72,7 +75,10 @@ function createItemEl(columnEl, column, item, index) {
   //after run every item in our array, here we adding our css class of drag item
   listEl.classList.add('drag-item');
   // the next thing that we add to the text item
-  listEl.textContent = item
+  listEl.textContent = item;
+  //Make an Element Draggable
+  listEl.draggable = true;
+  listEl.setAttribute('ondragstrart', 'drag(event');
   // we going to Append child and use list element
   //next step Append 
   columnEl.appendChild(listEl);
@@ -111,4 +117,16 @@ function updateDOM() {
     createItemEl(onHoldListEl, 3, onHoldItem, index);
   }); 
 }
+
+
+//when I tem Start Dragging
+// that is going to show us the target of the event that we just triggered
+function drag(e){
+  draggedItem = e.target;
+  console.log('draggedItem' , draggedItem);
+}
+
+
+
+
 updateDOM();

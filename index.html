@@ -20,7 +20,7 @@
             </span>
             <!-- Backlog content -->
                 <div id="backlog-content" class="custom-scroll">
-                   <ul class="drag-item-list" id="backlog-list"></ul>
+                   <ul class="drag-item-list" id="backlog-list"  ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
                 </div>
                 <!-- Add buttom Group for every column -->
                 <div class="add-btn-group">
@@ -30,19 +30,22 @@
                     </div>
                     <!-- solid: Add borders to create a bordered button  -->
                     <div class="add-btn solid">
+                        <span>Save Item</span>
+                    </div>
+                    <div class="add-container">
                         <div class="add-item"></div>
                     </div>
                 </div>
         
             </li>
-            <!-- progress content -->
+            <!-- progress Column -->
             <li class="drag-column progress-column">
                 <span class="header">
                     <h1>progress</h1>
                 </span>
                 <!-- progress content -->
                     <div id="progress-content"class="custom-scroll">
-                       <ul class="drag-item-list" id="progress-list"></ul>
+                       <ul class="drag-item-list" id="progress-list" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
                     </div>
                     <!-- Add buttom Group for every column -->
                     <div class="add-btn-group">
@@ -51,29 +54,34 @@
                             <span>Add Item</span>
                         </div>
                         <div class="add-btn solid">
+                            <span>Save Item</span>
+                        </div>
+                        <div class="add-container">
                             <div class="add-item"></div>
                         </div>
                     </div>
             
                 </li>
-                <!--  complete- content -->
+                <!--  complete column -->
                 <li class="drag-column complete-column">
                     <span class="header">
                         <h1>Complete</h1>
                     </span>
                     <!-- complete content -->
                         <div id="complete-content" class="custom-scroll">
-                           <ul class="drag-item-list" id="complete-list"></ul>
+                           <ul class="drag-item-list" id="complete-list" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
                         </div>
-                        <!-- Add buttom Group for every column -->
+                        <!-- Add Buttom Group for every column -->
                         <div class="add-btn-group">
                             <div class="add-btn">
-                                <span class="plus-sign">+</span>
-                                <span>Add Item</span>
-                            </div>
-                            <div class="add-btn solid">
-                                <div class="add-item"></div>
-                            </div>
+                                    <span class="plus-sign">+</span>
+                                    <span>Add Item</span>
+                                <div class="add-btn solid">
+                                    <span>Save Item</span>
+                                </div>
+                                <div class="add-container">
+                                    <div class="add-item"></div>
+                                </div>
                         </div>
                 
                     </li>
@@ -84,7 +92,7 @@
                         </span>
                         <!-- on hold content -->
                             <div id="on-hold-content" class="custom-scroll">
-                               <ul class="drag-item-list" id="on-hold-list"></ul>
+                               <ul class="drag-item-list" id="on-hold-list" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
                             </div>
                             <!-- Add buttom Group for every column -->
                             <div class="add-btn-group">
@@ -93,6 +101,9 @@
                                     <span>Add Item</span>
                                 </div>
                                 <div class="add-btn solid">
+                                    <span>Save Item</span>
+                                </div>
+                                <div class="add-container">
                                     <div class="add-item"></div>
                                 </div>
                             </div>
