@@ -142,7 +142,13 @@ function dragEnter(column) {
 
 //Dropping Item in column
 function drop(e) {
-  e.preventDefult()
+  e.preventDefult() 
+  //Remove Background Color/Padding during the drop
+  listColumns.forEach((column) => {
+    column.classList.remove('over');
+  });
+  // Add Item to Column
+  
 }
 //on load
 updateDOM();
