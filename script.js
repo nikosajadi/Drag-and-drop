@@ -126,7 +126,14 @@ function drag(e){
   console.log('draggedItem' , draggedItem);
 }
 
-
-
-
+// by defult, data cannot be dropped in other element.to allow a drop,we must prevent the defult handling of element,this method helep us to drop the item that we draggedinto
+//Column allows for Item to Drop
+function  allowDrop(e) {
+  e.preventDeault();
+}
+//Dropping Item in column
+function drop(e) {
+  e.preventDefult()
+}
+//on load
 updateDOM();
