@@ -131,6 +131,15 @@ function drag(e){
 function  allowDrop(e) {
   e.preventDeault();
 }
+
+//When Item Enters Column Area
+function dragEnter(column) {
+  // console.log(listColumns[column]);
+  //we want to use our class lists,not to add the Css class also add padding and add the colors
+  listColumns[column].classList.add('over');
+}
+
+
 //Dropping Item in column
 function drop(e) {
   e.preventDefult()
