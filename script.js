@@ -14,6 +14,8 @@ const onHoldListEl = document.getElementById('on-hold-list');
 // Items 
 let updatedOnLoad = false; 
 
+
+
 // Initialize Arrays
 //this is going to store the data for each of our lists 
 let backlogListArray = [];
@@ -25,6 +27,10 @@ let listArrays = [];
 //Drag Functionality 
 //it is not going to be set any things because it is going to be replaced in that function
 let draggedItem;
+//we need to that down dragEnter to determine wich column we want to drop into
+let currentColumn;
+
+
 
 //get Arrays from localStorage if available, set defult values if not
 function getSavedColumns() {
@@ -123,7 +129,7 @@ function updateDOM() {
 // that is going to show us the target of the event that we just triggered
 function drag(e){
   draggedItem = e.target;
-  console.log('draggedItem' , draggedItem);
+  console.log('draggedItem:' , draggedItem);
 }
 
 // by defult, data cannot be dropped in other element.to allow a drop,we must prevent the defult handling of element,this method helep us to drop the item that we draggedinto
@@ -137,18 +143,22 @@ function dragEnter(column) {
   // console.log(listColumns[column]);
   //we want to use our class lists,not to add the Css class also add padding and add the colors
   listColumns[column].classList.add('over');
+  // for show us dragEnter(number)
+  currentColumn= column;
 }
 
 
 //Dropping Item in column
 function drop(e) {
-  e.preventDefult() 
-  //Remove Background Color/Padding during the drop
+  e.preventDefult();
+  //Remove Background Color/Padding 
   listColumns.forEach((column) => {
     column.classList.remove('over');
   });
-  // Add Item to Column
-  
+  // Add Item to Column (creat parent here)
+  const parent = listColumns[currentColumn];
+  parent.appendChild(draggedItem);
+    
 }
 //on load
 updateDOM();
