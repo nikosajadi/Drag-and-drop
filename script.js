@@ -99,7 +99,7 @@ function updateDOM() {
   //this will allow us reset and remove all of the element within our  list
   //backlogList
   backlogListEl.textContent = '';
-  //here is run for every item in our array
+  //here is run for every item in our array (eventually updaye our localstorege)
   backlogListArray.forEach((backlogItem, index) => {
     createItemEl(backlogListEl, 0, backlogItem, index);
   });
@@ -123,6 +123,16 @@ function updateDOM() {
     createItemEl(onHoldListEl, 3, onHoldItem, index);
   }); 
 }
+
+//Allows arrays to reflect Drag and Drop items
+function rebuildArrays() {
+  console.log(backlogList.children); 
+  console.log(progressList.children);
+  for (let i = 0; i < backlogListEl.children.length; i++) {
+    backlogListArray.push(backlogListEl.children[i].textContent);
+}
+
+ 
 
 
 //when I tem Start Dragging
@@ -158,7 +168,10 @@ function drop(e) {
   // Add Item to Column (creat parent here)
   const parent = listColumns[currentColumn];
   parent.appendChild(draggedItem);
-    
+  rebuildArrays()
 }
 //on load
 updateDOM();
+
+//update our array and update our local storage
+
