@@ -62,7 +62,7 @@ ul {
 .backlog-column .header,
 .backlog-column .solid,
 .backlog-column .solid:hover,
-.backlog-column .over {
+.backlog-column .over { 
   background-color: var(--column-1);
 }
 

@@ -131,7 +131,22 @@ function rebuildArrays() {
   for (let i = 0; i < backlogListEl.children.length; i++) {
     backlogListArray.push(backlogListEl.children[i].textContent);
 }
+progressListArray = [];
+for (let i = 0; i < progressListEl.children.length; i++) {
+  progressListArray.push(progressListEl.children[i].textContent);
+}
+completeListArray = [];
+for (let i = 0; i < completeListEl.children.length; i++) {
+  completeListArray.push(completeListEl.children[i].textContent);
+}
+onHoldListArray = [];
+for (let i = 0; i < onHoldListEl.children.length; i++) {
+  onHoldListArray.push(onHoldListEl.children[i].textContent);
+}
+updateDOM();
+}
 
+ 
  
 
 
@@ -150,7 +165,7 @@ function  allowDrop(e) {
 
 //When Item Enters Column Area
 function dragEnter(column) {
-  // console.log(listColumns[column]);
+ // console.log(listColumns[column]);
   //we want to use our class lists,not to add the Css class also add padding and add the colors
   listColumns[column].classList.add('over');
   // for show us dragEnter(number)
