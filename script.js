@@ -42,15 +42,13 @@ function getSavedColumns() {
         progressListArray = JSON.parse(localStorage.progressItems);
         completeListArray = JSON.parse(localStorage.completeItems);
         onHoldListArray = JSON.parse(localStorage.onHoldItems); 
- 
-
-    } else {
+     } else {
         //create bookmarks array in localStorage
         backlogListArray = ['Release the course', 'Sit back and relax'];
         progressListArray = ['Work on projects', 'Listen to music'];
         completeListArray = ['Being cool', 'Getting stuff done'];
         onHoldListArray = ['Being uncool'];
-}
+      }
 }
 //for test we call this function
 // getSavedColumns();
@@ -71,10 +69,10 @@ function updateSavedColumns() {
 
 //create DOM element FOR each list Items
 function createItemEl(columnEl, column, item, index) {
-  console.log('columnEl:', columnEl);
-  console.log('column:', column);
-  console.log('item:', item);
-  console.log('index:', index);
+  // console.log('columnEl:', columnEl);
+  // console.log('column:', column);
+  // console.log('item:', item);
+  // console.log('index:', index);
       //List Item
       //creates an element,a list element specificaly adding in the class of drag item so we creating a lis element.
   const listEl = document.createElement('li');
@@ -132,8 +130,10 @@ function updateDOM() {
 
 //Allows arrays to reflect Drag and Drop items
 function rebuildArrays() {
-  console.log(backlogList.children); 
-  console.log(progressList.children);
+  // console.log(backlogList.children); 
+  // console.log(progressList.children);
+    // emty Arraye befor pussh to avoid a repeating
+  backlogListArray = [];
   for (let i = 0; i < backlogListEl.children.length; i++) {
     backlogListArray.push(backlogListEl.children[i].textContent);
 }
