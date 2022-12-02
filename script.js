@@ -128,6 +128,19 @@ function updateDOM() {
   updateSavedColumns();
 }
 
+//show Add Item Input Box
+function showInputBox(column) {
+      // we want to hide our button once we have clicked it.
+   addBtns[column].style.visibility = 'hidden';
+     //we want to show our save button
+   saveItemBtns[column].style.display='flex';
+    //show our item continer 
+  addItemContainers[column].style.display='flex';
+}
+
+
+
+
 //Allows arrays to reflect Drag and Drop items
 function rebuildArrays() {
   // console.log(backlogList.children); 
