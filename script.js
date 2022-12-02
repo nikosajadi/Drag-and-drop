@@ -138,6 +138,12 @@ function showInputBox(column) {
   addItemContainers[column].style.display='flex';
 }
 
+// hide Item Inbut box
+function hideInputBox(column) {
+    addBtns[column].style.visibility = 'visible';
+    saveItemBtns[column].style.display='none';
+    addItemContainers[column].style.display='none';
+}
 
 
 
