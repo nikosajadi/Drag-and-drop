@@ -134,7 +134,8 @@ function addToColumnList(column) {
   const itemText = addItems[column].textContent;
   const selectedArray = listArrays[column];
   selectedArray.push(itemText);
-  
+   // Reset Textbox 
+   addItems[column].textContent =''
   updateDOM();
 }
 
