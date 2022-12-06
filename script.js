@@ -69,10 +69,10 @@ function updateSavedColumns() {
 
 //create DOM element FOR each list Items
 function createItemEl(columnEl, column, item, index) {
+   console.log('item:', item);
   // console.log('columnEl:', columnEl);
-  // console.log('column:', column);
-  // console.log('item:', item);
-  // console.log('index:', index);
+   console.log('column:', column);
+   console.log('index:', index);
       //List Item
       //creates an element,a list element specificaly adding in the class of drag item so we creating a lis element.
   const listEl = document.createElement('li');
@@ -83,9 +83,13 @@ function createItemEl(columnEl, column, item, index) {
      //Make an Element Draggable
   listEl.draggable = true;
   listEl.setAttribute('ondragstart', 'drag(event)');
+    // we going to add new elements in our column element
   listEl.contentEditable = true;
+  listEl.id = 'index';
+  listEl.setAttribute('onfocusout', `updateItem(${index}, ${column})`);
+  
      // we going to Append child and use list element
-     //next step Append 
+     //Append 
      columnEl.appendChild(listEl);
 }
 
