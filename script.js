@@ -112,25 +112,37 @@ function updateDOM() {
   // Progress Column
   progressListEl.textContent = '';
   progressListArray.forEach((progressItem, index) => {
-    createItemEl(progressListEl, 0, progressItem, index);
+    createItemEl(progressListEl, 1, progressItem, index);
   });
   //progressListArray = filterArray(progressListArray);
   // Complete Column
   completeListEl.textContent = '';
   completeListArray.forEach((completeItem, index) => {
-    createItemEl(completeListEl, 0, completeItem, index);
+    createItemEl(completeListEl, 2, completeItem, index);
   });
   //completeListArray = filterArray(completeListArray);
   // On Hold Column
   onHoldListEl.textContent = '';
   onHoldListArray.forEach((onHoldItem, index) => {
-    createItemEl(onHoldListEl, 0, onHoldItem, index);
+    createItemEl(onHoldListEl, 3, onHoldItem, index);
   }); 
 
   // Don't run more than once on our Dum, Update Local Storage
   updatedOnLoad = true;
   updateSavedColumns();
 }
+
+//update Item - Delete if necessary, or update Array value
+function updateItem(id,column){
+  const selectedArray = listArrays[column];
+  console.log(selectedArray);
+    // we want to get a list of all childs item here
+  const selectedColumnEl = listColumns[column].children;
+  console.log(selectedColumnEl[id].textContent);
+}
+
+
+
 
 // Add to column List, Reset Textbox
 function addToColumnList(column) {
