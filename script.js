@@ -123,11 +123,23 @@ function updateDOM() {
     createItemEl(onHoldListEl, 0, onHoldItem, index);
   }); 
 
-  // Don't run more than once, Update Local Storage
+  // Don't run more than once on our Dum, Update Local Storage
   updatedOnLoad = true;
   updateSavedColumns();
 }
 
+// Add to column List, Reset Textbox
+function addToColumnList(column) {
+  // console.log(addItems[column].textContent);
+  const itemText = addItems[column].textContent;
+  const selectedArray = listArrays[column];
+  selectedArray.push(itemText);
+  
+  updateDOM();
+}
+
+
+ 
 //show Add Item Input Box
 function showInputBox(column) {
       // we want to hide our button once we have clicked it.
@@ -143,7 +155,9 @@ function hideInputBox(column) {
     addBtns[column].style.visibility = 'visible';
     saveItemBtns[column].style.display='none';
     addItemContainers[column].style.display='none';
+    addToColumn(column);
 }
+
 
 
 
@@ -154,6 +168,7 @@ function rebuildArrays() {
     // emty Arraye befor pussh to avoid a repeating
   backlogListArray = [];
   for (let i = 0; i < backlogListEl.children.length; i++) {
+    // because we want to have textContent 
     backlogListArray.push(backlogListEl.children[i].textContent);
 }
 progressListArray = [];
