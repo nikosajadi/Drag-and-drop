@@ -10,29 +10,29 @@ const progressListEl = document.getElementById('progress-list');
 const completeListEl = document.getElementById('complete-list');
 const onHoldListEl = document.getElementById('on-hold-list');
 
-// we want to show that we have not yet loaded from local storage
+    // we want to show that we have not yet loaded from local storage
 // Items 
 let updatedOnLoad = false; 
 
 
 
 // Initialize Arrays
-//this is going to store the data for each of our lists 
+   //this is going to store the data for each of our lists 
 let backlogListArray = [];
 let progressListArray =[];
 let completeListArray = [];
 let onHoldListArray = [];
-//is just going to be an array of all these other arrays
+    //is just going to be an array of all these other arrays
 let listArrays = [];
 //Drag Functionality 
-//it is not going to be set any things because it is going to be replaced in that function
+   //it is not going to be set any things because it is going to be replaced in that function
 let draggedItem;
-//we need to that down dragEnter to determine wich column we want to drop into
+   //we need to that down dragEnter to determine wich column we want to drop into
 let currentColumn;
 
 
 
-//get Arrays from localStorage if available, set defult values if not
+   //get Arrays from localStorage if available, set defult values if not
 function getSavedColumns() {
     // here is checking to see if backlog items exists in localStorage
     if (localStorage.getItem('backlogItems')) {
@@ -50,11 +50,11 @@ function getSavedColumns() {
         onHoldListArray = ['Being uncool'];
       }
 }
-//for test we call this function
+     //for test we call this function
 // getSavedColumns();
 // updateSavedColumns();
 
-//set the value here and saving this value into localStorage
+     //set the value here and saving this value into localStorage
 //Set the value
 function updateSavedColumns() {
     listArrays = [backlogListArray, progressListArray, completeListArray, onHoldListArray];
@@ -66,6 +66,19 @@ function updateSavedColumns() {
     //localStorage.setItem('progress', JSON.stringify(progressListArray));
     
   }
+// Filter Arrays to remove duplicates items
+function filterArray(array) {
+console.log(array);
+const filterArray = array.filter(item => item !== null);
+console.log(filterArray);
+return filterArray;  
+}
+
+
+ 
+
+
+
 
 //create DOM element FOR each list Items
 function createItemEl(columnEl, column, item, index) {
@@ -100,34 +113,36 @@ function updateDOM() {
       //we only wanted to run,this gets saved comb's function once when we load the page.
     getSavedColumns();
   }
-  //this will allow us reset and remove all of the element within our  list
-  //backlogList
-  backlogListEl.textContent = '';
+
+
+      //this will allow us reset and remove all of the element within our  list
+  //Backlog  List
+  backlogList.textContent = '';
   //here is run for every item in our array (eventually updaye our localstorege)
   backlogListArray.forEach((backlogItem, index) => {
-    createItemEl(backlogListEl, 0, backlogItem, index);
+    createItemEl(backlogList, 0, backlogItem, index);
   });
 
-  //backlogListArray = filterArray(backlogListArray);
+  backlogListArray = filterArray(backlogListArray);
   // Progress Column
-  progressListEl.textContent = '';
+  progressList.textContent = '';
   progressListArray.forEach((progressItem, index) => {
-    createItemEl(progressListEl, 1, progressItem, index);
+    createItemEl(progressList, 1, progressItem, index);
   });
-  //progressListArray = filterArray(progressListArray);
+  progressListArray = filterArray(progressListArray);
   // Complete Column
-  completeListEl.textContent = '';
+  completeList.textContent = '';
   completeListArray.forEach((completeItem, index) => {
-    createItemEl(completeListEl, 2, completeItem, index);
+    createItemEl(completeList, 2, completeItem, index);
   });
-  //completeListArray = filterArray(completeListArray);
+  completeListArray = filterArray(completeListArray);
   // On Hold Column
-  onHoldListEl.textContent = '';
+  onHoldList.textContent = '';
   onHoldListArray.forEach((onHoldItem, index) => {
-    createItemEl(onHoldListEl, 3, onHoldItem, index);
+    createItemEl(onHoldList, 3, onHoldItem, index);
   }); 
-
-  // Don't run more than once on our Dum, Update Local Storage
+  onHoldListArray = filterArray(onHoldListArray);
+   // Don't run more than once on our Dum, Update Local Storage
   updatedOnLoad = true;
   updateSavedColumns();
 }
@@ -139,6 +154,12 @@ function updateItem(id,column){
     // we want to get a list of all childs item here
   const selectedColumnEl = listColumns[column].children;
   console.log(selectedColumnEl[id].textContent);
+  if (!selectedColumnEl[id].textContent) {
+    //I going to delete it from the array itself not just from the column element I am targeting here.
+    delete selectedArray[id];
+  }
+  // console.log(selectedArray);
+  updateDOM();
 }
 
 
