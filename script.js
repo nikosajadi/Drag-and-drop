@@ -10,29 +10,26 @@ const progressListEl = document.getElementById('progress-list');
 const completeListEl = document.getElementById('complete-list');
 const onHoldListEl = document.getElementById('on-hold-list');
 
-    // we want to show that we have not yet loaded from local storage
+    //*we want to show that we have not yet loaded from local storage
 // Items 
 let updatedOnLoad = false; 
-
-
-
 // Initialize Arrays
-   //this is going to store the data for each of our lists 
+   //*this is going to store the data for each of our lists 
 let backlogListArray = [];
 let progressListArray =[];
 let completeListArray = [];
 let onHoldListArray = [];
-    //is just going to be an array of all these other arrays
+    //*is just going to be an array of all these other arrays
 let listArrays = [];
 //Drag Functionality 
-   //it is not going to be set any things because it is going to be replaced in that function
+   //*it is not going to be set any things because it is going to be replaced in that function
 let draggedItem;
-   //we need to that down dragEnter to determine wich column we want to drop into
+   //*we need to that down dragEnter to determine wich column we want to drop into
 let currentColumn;
 
 
 
-   //get Arrays from localStorage if available, set defult values if not
+//Get Arrays from localStorage if available, set defult values if not
 function getSavedColumns() {
     // here is checking to see if backlog items exists in localStorage
     if (localStorage.getItem('backlogItems')) {
@@ -41,31 +38,32 @@ function getSavedColumns() {
         backlogListArray = JSON.parse(localStorage.backlogItems);
         progressListArray = JSON.parse(localStorage.progressItems);
         completeListArray = JSON.parse(localStorage.completeItems);
-        onHoldListArray = JSON.parse(localStorage.onHoldItems); 
-     } else {
+        onHoldListArray = JSON.parse(localStorage.onHoldItems);
+      } else {
         //create bookmarks array in localStorage
         backlogListArray = ['Release the course', 'Sit back and relax'];
         progressListArray = ['Work on projects', 'Listen to music'];
         completeListArray = ['Being cool', 'Getting stuff done'];
         onHoldListArray = ['Being uncool'];
       }
-}
-     //for test we call this function
-// getSavedColumns();
+    }
+
+     //*for test we call this function
+ //getSavedColumns();
 // updateSavedColumns();
 
-     //set the value here and saving this value into localStorage
+     //*set the value here and saving this value into localStorage
 //Set the value
+// Set localStorage Arrays
 function updateSavedColumns() {
-    listArrays = [backlogListArray, progressListArray, completeListArray, onHoldListArray];
-    const arrayNames = ['backlog', 'progress', 'complete', 'onHold'];
-    arrayNames.forEach((arrayName, index) => {
-      localStorage.setItem(`${arrayName}Items`, JSON.stringify(listArrays[index]));
-    });
-    //localStorage.setItem('backlog', JSON.stringify(backlogListArray));
-    //localStorage.setItem('progress', JSON.stringify(progressListArray));
-    
-  }
+  listArrays = [backlogListArray, progressListArray, completeListArray, onHoldListArray];
+  const arrayNames = ['backlog', 'progress', 'complete', 'onHold'];
+  arrayNames.forEach((arrayName, index) => {
+    localStorage.setItem(`${arrayName}Items`, JSON.stringify(listArrays[index]));
+  });
+}
+
+
 // Filter Arrays to remove duplicates items
 function filterArray(array) {
 console.log(array);
@@ -73,12 +71,6 @@ const filterArray = array.filter(item => item !== null);
 console.log(filterArray);
 return filterArray;  
 }
-
-
- 
-
-
-
 
 //create DOM element FOR each list Items
 function createItemEl(columnEl, column, item, index) {
@@ -113,33 +105,31 @@ function updateDOM() {
       //we only wanted to run,this gets saved comb's function once when we load the page.
     getSavedColumns();
   }
-
-
       //this will allow us reset and remove all of the element within our  list
   //Backlog  List
-  backlogList.textContent = '';
+  backlogListEl.textContent = '';
   //here is run for every item in our array (eventually updaye our localstorege)
+  //* map function is not necessary here because the array itself dose not get modified  so we used foreach instead of map function.
   backlogListArray.forEach((backlogItem, index) => {
-    createItemEl(backlogList, 0, backlogItem, index);
+    createItemEl(backlogListArray, 0, backlogItem, index);
   });
-
   backlogListArray = filterArray(backlogListArray);
   // Progress Column
-  progressList.textContent = '';
+  progressListEl.textContent = '';
   progressListArray.forEach((progressItem, index) => {
     createItemEl(progressList, 1, progressItem, index);
   });
   progressListArray = filterArray(progressListArray);
   // Complete Column
-  completeList.textContent = '';
+  completeListEl.textContent = '';
   completeListArray.forEach((completeItem, index) => {
-    createItemEl(completeList, 2, completeItem, index);
+    createItemEl(completeListEl, 2, completeItem, index);
   });
   completeListArray = filterArray(completeListArray);
   // On Hold Column
-  onHoldList.textContent = '';
+  onHoldListEl.textContent = '';
   onHoldListArray.forEach((onHoldItem, index) => {
-    createItemEl(onHoldList, 3, onHoldItem, index);
+    createItemEl(onHoldListEl, 3, onHoldItem, index);
   }); 
   onHoldListArray = filterArray(onHoldListArray);
    // Don't run more than once on our Dum, Update Local Storage
@@ -166,14 +156,14 @@ function updateItem(id,column){
 
 
 // Add to column List, Reset Textbox
-function addToColumnList(column) {
+function addToColumn(column) {
   // console.log(addItems[column].textContent);
   const itemText = addItems[column].textContent;
   const selectedArray = listArrays[column];
   selectedArray.push(itemText);
    // Reset Textbox 
    addItems[column].textContent =''
-  updateDOM();
+   updateDOM(column);
 }
 
 
@@ -201,26 +191,18 @@ function hideInputBox(column) {
 
 //Allows arrays to reflect Drag and Drop items
 function rebuildArrays() {
-  // console.log(backlogList.children); 
-  // console.log(progressList.children);
-    // emty Arraye befor pussh to avoid a repeating
-  backlogListArray = [];
-  for (let i = 0; i < backlogListEl.children.length; i++) {
-    // because we want to have textContent 
-    backlogListArray.push(backlogListEl.children[i].textContent);
-}
-progressListArray = [];
-for (let i = 0; i < progressListEl.children.length; i++) {
-  progressListArray.push(progressListEl.children[i].textContent);
-}
-completeListArray = [];
-for (let i = 0; i < completeListEl.children.length; i++) {
-  completeListArray.push(completeListEl.children[i].textContent);
-}
-onHoldListArray = [];
-for (let i = 0; i < onHoldListEl.children.length; i++) {
-  onHoldListArray.push(onHoldListEl.children[i].textContent);
-}
+  console.log(backlogListEl.children)
+// progressListArray = [];
+// for (let i = 0; i < progressListEl.children.length; i++) {
+//   progressListArray.push(progressListEl.children[i].textContent);
+// }
+   // instead of those way, I going to use map method because I am not trying to change the data in my array***(map function use us over in Loop or For each because is usful when changing or altering this data in our array. )
+   // map(function) not only is it usally faster,but it also returns a brand new array for us by doing a map.
+    // *Array.from = convert array'object to NEW array
+backlogListArray = Array.from(backlogListEl.children).map(i => i.textContent);
+completeListArray =Array.from( completeListEl.children).map(i => i.textContent);
+progressListArray = Array.from(progressListEl.children).map(i => i.textContent);
+onHoldListArray = Array.from(onHoldListEl.children).map(i => i.textContent);
   // acually rebuild everything
 updateDOM();
 }
