@@ -24,7 +24,8 @@ let listArrays = [];
 //Drag Functionality 
    //*it is not going to be set any things because it is going to be replaced in that function
 let draggedItem;
-   //*we need to that down dragEnter to determine wich column we want to drop into
+let dragging = false;
+//*we need to that down dragEnter to determine wich column we want to drop into
 let currentColumn;
 
 
@@ -66,18 +67,20 @@ function updateSavedColumns() {
 
 // Filter Arrays to remove duplicates items
 function filterArray(array) {
-console.log(array);
+// console.log(array);
 const filterArray = array.filter(item => item !== null);
-console.log(filterArray);
+// console.log(filterArray);
 return filterArray;  
 }
 
 //create DOM element FOR each list Items
 function createItemEl(columnEl, column, item, index) {
-   console.log('item:', item);
-  // console.log('columnEl:', columnEl);
-   console.log('column:', column);
-   console.log('index:', index);
+  //  console.log('item:', item);
+  // // console.log('columnEl:', columnEl);
+  //  console.log('column:', column);
+  //  console.log('index:', index);
+
+   
       //List Item
       //creates an element,a list element specificaly adding in the class of drag item so we creating a lis element.
   const listEl = document.createElement('li');
@@ -140,17 +143,21 @@ function updateDOM() {
 //update Item - Delete if necessary, or update Array value
 function updateItem(id,column){
   const selectedArray = listArrays[column];
-  console.log(selectedArray);
+  // console.log(selectedArray);
     // we want to get a list of all childs item here
   const selectedColumnEl = listColumns[column].children;
   console.log(selectedColumnEl[id].textContent);
+ if(!dragging) {
   if (!selectedColumnEl[id].textContent) {
     //I going to delete it from the array itself not just from the column element I am targeting here.
     delete selectedArray[id];
+  } else {
+    selectedArray[id] = selectedColumnEl[id].textContent;
   }
   // console.log(selectedArray);
   updateDOM();
 }
+ }
 
 
 
@@ -197,7 +204,7 @@ function rebuildArrays() {
 //   progressListArray.push(progressListEl.children[i].textContent);
 // }
    // instead of those way, I going to use map method because I am not trying to change the data in my array***(map function use us over in Loop or For each because is usful when changing or altering this data in our array. )
-   // map(function) not only is it usally faster,but it also returns a brand new array for us by doing a map.
+   // *map(function) not only is it usally faster,but it also returns a brand new array for us by doing a map.
     // *Array.from = convert array'object to NEW array
 backlogListArray = Array.from(backlogListEl.children).map(i => i.textContent);
 completeListArray =Array.from( completeListEl.children).map(i => i.textContent);
